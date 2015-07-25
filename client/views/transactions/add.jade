@@ -1,0 +1,46 @@
+template(name='addTransaction')
+  .container
+    .row
+      .col-xs-12
+        form(data-id='add-transaction-form')
+          h3 Ausgabe hinzufügen
+          .content-block.table
+            .row
+              .col-xs-3
+                label Typ
+              .col-xs-9
+                select.input(name='type' data-id='type')
+                  option(value='expense') Ausgabe
+                  option(value='earning') Einnahme
+            .row
+              .col-xs-3
+                label Datum
+              .col-xs-9
+                input.input(name='date' data-id='date')
+            .row
+              .col-xs-3
+                label Konto
+              .col-xs-9
+                select.input(name='account-id' data-id='account-id')
+                  each accounts
+                    option(value='{{_id}}') {{name}}
+            .row
+              .col-xs-3
+                label Betrag
+              .col-xs-9
+                input.input(name='value' data-id='value')
+            .row
+              .col-xs-3
+                label Kategorie
+              .col-xs-9
+                input.input(name='category' data-id='category')
+            .row
+              .col-xs-3
+                label Beschreibung
+              .col-xs-9
+                input.input(name='description' data-id='description')
+            .row
+              .col-xs-6
+                a.button(href="{{pathFor 'transactions'}}") Abbrechen
+              .col-xs-6.text-right
+                button.btn.btn-success(type='submit' data-id='add-transaction') Speichern

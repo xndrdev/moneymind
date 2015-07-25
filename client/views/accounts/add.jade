@@ -1,0 +1,28 @@
+template(name='addAccount')
+  .container
+    .row
+      .col-xs-12
+        .content-block
+          form(data-id='add-account-form')
+            .row
+              .col-xs-4
+                label Name
+              .col-xs-8
+                input.input(name='name' data-id='name')
+            .row
+              .col-xs-4
+                label Typ
+              .col-xs-8
+                select.input(name='type' data-id='type')
+                  option(value='bank') Bank
+                  option(value='cash') Bar
+            .row
+              .col-xs-4
+                label Beschreibung
+              .col-xs-8
+                input.input(name='description' data-id='description')
+            .row
+              .col-xs-6
+                a.button(href="{{pathFor 'accounts'}}") Abbrechen
+              .col-xs-6.text-right
+                button.button(type='submit' data-id='add-account') Speichern

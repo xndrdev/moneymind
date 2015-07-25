@@ -1,0 +1,19 @@
+template(name='importTransactions')
+  .container
+    .row
+      .col-xs-12
+        h2 Importieren
+    .row
+      .content-block
+        .content
+          form(data-id='csv-import-file-form')
+            .row
+              .col-xs-4
+                input.input(type='file' name='csv-import-file' data-id='csv-import-file')
+              .col-xs-4
+                select.input(name='account-id' data-id='account-id')
+                  each accounts
+                    option(value='{{_id}}') {{name}}
+            .row
+              .col-xs-12.text-right
+                button.btn.btn-success(type='submit') Importieren

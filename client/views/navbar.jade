@@ -1,0 +1,32 @@
+template(name='navbar')
+  nav.nav
+    .container
+      .row
+        .col-xs-2
+          .logo
+            a(href='/')
+              img(src='/images/nav-logo.png')
+        .col-xs-4
+        .col-xs-6
+          if currentUser
+            ul
+              li
+                a(href="{{pathFor 'dashboard'}}")
+                  i.fa.fa-dashboard
+                  | Dashboard
+              li
+                a(href="{{pathFor 'accounts'}}")
+                  i.fa.fa-university
+                  | Konten
+              li
+                a(href="{{pathFor 'transactions'}}")
+                  i.fa.fa-money
+                  | Transaktionen
+              li
+                a(href="{{pathFor 'signOut'}}")
+                  i.fa.fa-power-off
+                  | Logout
+          else
+            ul
+              li
+                a(href="{{pathFor 'signIn'}}") Anmelden

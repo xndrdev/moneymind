@@ -1,0 +1,113 @@
+template(name='transactions')
+  #assign-category-modal.modal.fade
+    .modal-dialog
+      .modal-content
+        form(data-id='modal-assign-category-form')
+          .modal-header
+            button.close(type='button' data-dismiss='modal' aria-label='Close')
+              span(aria-hidden='true') &times;
+            h4.modal-title Kategorie zuweisen
+          .modal-body
+            p Bitte Kategorie zuweisen
+            input(type='hidden' data-id='modal-transaction-id')
+            input.input(name='assign-category-input' data-id='modal-assign-category')
+          .modal-footer
+            button.btn.btn-primary(type='button' data-dismiss='modal') Abbrechen
+            button.btn.btn-success(type='submit' data-id='assign-category') Zuweisen
+  .container
+    .row
+      .col-xs-12.text-right
+        .actions
+          a.btn.btn-success(href="{{pathFor 'addTransaction'}}") Neu
+          a.btn.btn-success(href="{{pathFor 'importTransactions'}}") Import
+    .row
+      .col-xs-12.text-center
+        h2 Filter
+    .row
+      .col-xs-12
+        .content-block.table
+          .table-head
+            .row
+              .col-xs-2 Datum
+              .col-xs-2 Konto
+              .col-xs-2 Betrag
+              .col-xs-2 Kategorie
+              .col-xs-3 Beschreibung
+              .col-xs-1 Aktionen
+          .table-body
+            .row
+              form(data-id='filter-transaction-form')
+                .col-xs-2
+                  input.input(name='date' data-id='filter-date' value='{{filterDate}}')
+                .col-xs-2
+                  select.input(name='account-id' data-id='filter-account-id')
+                    option(value='') -
+                    each accounts
+                      option(value='{{_id}}' selected='{{isSelectedAccount this._id}}') {{name}}
+                .col-xs-2
+                  input.input(name='value' data-id='filter-value' value='{{filterValue}}')
+                .col-xs-2
+                  input.input(name='category' data-id='filter-category' value='{{filterCategory}}')
+                .col-xs-3
+                  input.input(name='description' data-id='filter-description' value='{{filterDescription}}')
+                .col-xs-1
+                  button.btn.btn-primary.center-block(data-id='reset-filter') Reset
+    .row
+      .col-xs-12.text-center
+        h2 Transaktionen
+    .row
+        with transactions
+          .col-xs-3
+            .content-block
+              .head Einnahmen {{currentYear}}
+              .big-number {{sumEarningsCurrentYear this}}
+          .col-xs-3
+            .content-block
+              .head Einnahmen {{currentMonth}}
+              .big-number {{sumEarningsCurrentMonth this}}
+          .col-xs-3
+            .content-block
+              .head Ausgaben {{currentYear}}
+              .big-number {{sumExpensesCurrentYear this}}
+          .col-xs-3
+            .content-block
+              .head Ausgaben {{currentMonth}}
+              .big-number {{sumExpensesCurrentMonth this}}
+    .row
+      .col-xs-12
+        .content-block.table
+          .table-head
+            .row
+              .col-xs-2 Datum
+              .col-xs-2 Konto
+              .col-xs-2 Betrag
+              .col-xs-2 Kategorie
+              .col-xs-3 Beschreibung
+              .col-xs-1 Aktionen
+          .table-body.transactions
+            if transactions.count
+              each transactions
+                .row(class='{{type}}')
+                  .col-xs-2
+                    .body {{formatDate date}}
+                  .col-xs-2
+                    .body {{account.name}}
+                  .col-xs-2
+                    .body {{formatNumber value}}
+                  .col-xs-2
+                    .body
+                      if isImported category
+                        a.button(href="{{pathFor 'updateImportCategory'}}" data-id='open-assign-category-modal')
+                          | Zuweisen
+                          i.fa.fa-pencil
+                      else
+                        |{{category}}
+                  .col-xs-3
+                    .body {{description}}
+                  .col-xs-1
+                    a.button(href="{{pathFor 'updateTransaction' transaction_id=this._id}}")
+                      i.fa.fa-pencil-square-o(data-id='update-transaction')
+                    button.button(data-id='remove-transaction')
+                      i.fa.fa-trash-o
+            else
+              |Keine Transaktionen vorhanden

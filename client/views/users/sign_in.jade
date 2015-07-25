@@ -1,0 +1,17 @@
+template(name='signIn')
+  .container
+    .row
+      .col-xs-12.col-md-6.col-md-offset-3
+        .content-block
+          .content
+            form#sign-in-form(data-id='sign-in-form')
+              .page-header Anmelden
+              label(for='email') Email
+              input#email.input(type='email' placeholder="Email" autofocus='true' data-id='email')
+              label(for='password') Passwort
+              input#password.input(type='password' placeholder="Passwort" data-id='password')
+              .actions
+                input.button.button-primary(type='submit' value="Login")
+                a.button.pull-right(href="{{pathFor 'signUp'}}") Registrieren
+            .text-center
+              a.button(href="{{pathFor 'resetPassword'}}") Passwort vergessen?

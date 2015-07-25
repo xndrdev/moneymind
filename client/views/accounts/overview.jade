@@ -1,0 +1,36 @@
+template(name='accounts')
+  .container
+    .row
+      .col-xs-12
+        .content-block.table
+          .table-head
+            .row
+              .col-xs-4 Name
+              .col-xs-2 Typ
+              .col-xs-4 Beschreibung
+              //.col-xs-1 Mitglieder
+              .col-xs-1 Bearbeiten
+              .col-xs-1 Löschen
+          .table-body
+            each accounts
+              .row
+                .col-xs-4
+                  .body {{name}}
+                .col-xs-2
+                  .body {{type}}
+                .col-xs-4
+                  .body {{description}}
+                //.col-xs-1
+                  .body
+                    a.button(href="{{pathFor 'collaborators '}}")
+                      i.fa.fa-users
+                .col-xs-1
+                  .body
+                    a.button(href="{{pathFor 'updateAccount' account_id=this._id}}")
+                      i.fa.fa-pencil-square-o
+                .col-xs-1
+                  button.button(data-id='remove-account')
+                    i.fa.fa-trash-o
+    .row
+      .col-xs-12.text-right
+        a.button(href="{{pathFor 'addAccount'}}") Konto hinzufügen

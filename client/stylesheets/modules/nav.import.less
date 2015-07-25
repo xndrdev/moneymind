@@ -1,0 +1,40 @@
+.nav{
+  height: 60px;
+  background-color: @navbar-color;
+  color: @primary-color;
+  border-bottom: 3px solid @primary-color;
+
+  ul{
+    list-style-type: none;
+    padding-left: 0;
+    text-align: right;
+
+    li{
+      display: inline;
+      border-right: 1px solid @dark-gray;
+      margin-right: 10px;
+      padding-right: 10px;
+
+      &:last-child{
+        border-right: 0;
+        margin-right: 0;
+      }
+
+      a{
+        color: @dark-gray;
+        display: inline-block;
+        line-height: 60px;
+        transition: all .2s ease-in-out;
+        text-decoration: none;
+
+        i{
+          margin-right: 3px;
+        }
+
+        &:hover{
+          color: @primary-color;
+        }
+      }
+    }
+  }
+}

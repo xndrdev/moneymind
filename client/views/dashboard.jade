@@ -1,0 +1,16 @@
+template(name='dashboard')
+  .container
+    .row
+      .col-xs-12
+        .row
+          .col-xs-3
+            .content-block
+              a.btn.btn-success(href="{{pathFor 'addTransaction'}}") Transaktion hinzufügen
+          .col-xs-3
+            .content-block
+              .head Gesamtausgaben
+              .big-number {{sumExpenses transactions}}
+          .col-xs-3
+            .content-block
+              .head Gesamteinnahmen
+              .big-number {{sumEarnings transactions}}

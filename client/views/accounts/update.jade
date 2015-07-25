@@ -1,0 +1,30 @@
+template(name='updateAccount')
+  .container
+    .row
+      .col-xs-12
+        with account
+          form(data-id='update-account-form')
+            h3 Konto bearbeiten: {{name}}
+            .content-block.table
+              .row
+                .col-xs-3
+                  label Name
+                .col-xs-9
+                  input.input(name='name' data-id='name' value='{{name}}')
+              .row
+                .col-xs-3
+                  label Typ
+                .col-xs-9
+                  select.input(name='type' data-id='type')
+                    option(value='bank' selected='{{selectedIfTypeIsBank type}}') Bank
+                    option(value='cash' selected='{{selectedIfTypeIsCash type}}') Bar
+              .row
+                .col-xs-3
+                  label Beschreibung
+                .col-xs-9
+                  input.input(name='description' data-id='description' value='{{description}}')
+              .row
+                .col-xs-6
+                  a.button(href="{{pathFor 'accounts'}}") Abbrechen
+                .col-xs-6.text-right
+                  button.btn.btn-success(type='submit' data-id='update-account') Speichern
