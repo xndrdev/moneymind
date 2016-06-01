@@ -32,9 +32,9 @@ template(name='updateTransaction')
                 .col-xs-3
                   label Konto
                 .col-xs-9
-                  select.input(name='account-id' data-id='account-id')
-                    each ../accounts
-                      option(value='{{_id}}' selected='{{isSelectedAccount _id ../accountId}}') {{name}}
+                  select.input(name='money-account-id' data-id='money-account-id')
+                    each ../moneyAccounts
+                      option(value='{{_id}}' selected='{{isSelectedMoneyAccount _id ../moneyAccountId}}') {{name}}
               .row
                 .col-xs-3
                   label Beschreibung

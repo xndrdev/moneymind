@@ -15,9 +15,9 @@ matb33:collection-hooks
 rzymek:moment-locale-de
 lepozepo:accounting
 harrison:papa-parse
-accounts-ui
 accounts-password
 juliancwirko:s-alert
 dburles:collection-helpers
 reactive-var
 mquandalle:jade
+accounts-base

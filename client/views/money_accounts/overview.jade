@@ -1,5 +1,11 @@
-template(name='accounts')
+template(name='moneyAccounts')
   .container
+    .row
+      .col-xs-12.text-right
+        a.btn.btn-success(href="{{pathFor 'addMoneyAccount'}}") Konto hinzufügen
+    .row
+      .col-xs-12.text-center
+        h2 Konten
     .row
       .col-xs-12
         .content-block.table
@@ -12,7 +18,7 @@ template(name='accounts')
               .col-xs-1 Bearbeiten
               .col-xs-1 Löschen
           .table-body
-            each accounts
+            each moneyAccounts
               .row
                 .col-xs-4
                   .body {{name}}
@@ -26,11 +32,8 @@ template(name='accounts')
                       i.fa.fa-users
                 .col-xs-1
                   .body
-                    a.button(href="{{pathFor 'updateAccount' account_id=this._id}}")
+                    a.button(href="{{pathFor 'updateMoneyAccount' money_account_id=this._id}}")
                       i.fa.fa-pencil-square-o
                 .col-xs-1
-                  button.button(data-id='remove-account')
+                  button.button(data-id='remove-money-account')
                     i.fa.fa-trash-o
-    .row
-      .col-xs-12.text-right
-        a.button(href="{{pathFor 'addAccount'}}") Konto hinzufügen

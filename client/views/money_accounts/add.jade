@@ -1,9 +1,9 @@
-template(name='addAccount')
+template(name='addMoneyAccount')
   .container
     .row
       .col-xs-12
-        .content-block
-          form(data-id='add-account-form')
+        .content-block.table
+          form(data-id='add-money-account-form')
             .row
               .col-xs-4
                 label Name
@@ -23,6 +23,6 @@ template(name='addAccount')
                 input.input(name='description' data-id='description')
             .row
               .col-xs-6
-                a.button(href="{{pathFor 'accounts'}}") Abbrechen
+                a.button(href="{{pathFor 'moneyAccounts'}}") Abbrechen
               .col-xs-6.text-right
-                button.button(type='submit' data-id='add-account') Speichern
+                button.btn.btn-success(type='submit' data-id='add-money-account') Speichern

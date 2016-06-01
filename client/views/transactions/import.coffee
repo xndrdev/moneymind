@@ -2,7 +2,7 @@ Template.importTransactions.events
   'submit [data-id=csv-import-file-form]': (event, template) ->
     event.preventDefault()
     fileInput = template.find('[data-id=csv-import-file]')
-    accountId = template.find('[data-id=account-id]').value
+    moneyAccountId = template.find('[data-id=moneyaccount-id]').value
 
     Papa.parse fileInput.files[0],
       header: true
@@ -11,7 +11,7 @@ Template.importTransactions.events
 
         data =
           results: results
-          accountId: accountId
+          moneyAccountId: moneyAccountId
 
         Meteor.call 'importTransactions', data, (error) ->
           if error

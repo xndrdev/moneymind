@@ -21,8 +21,8 @@ template(name='addTransaction')
               .col-xs-3
                 label Konto
               .col-xs-9
-                select.input(name='account-id' data-id='account-id')
-                  each accounts
+                select.input(name='money-account-id' data-id='money-account-id')
+                  each moneyAccounts
                     option(value='{{_id}}') {{name}}
             .row
               .col-xs-3

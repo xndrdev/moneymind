@@ -11,8 +11,8 @@ template(name='importTransactions')
               .col-xs-4
                 input.input(type='file' name='csv-import-file' data-id='csv-import-file')
               .col-xs-4
-                select.input(name='account-id' data-id='account-id')
-                  each accounts
+                select.input(name='moneyaccount-id' data-id='moneyaccount-id')
+                  each moneyAccounts
                     option(value='{{_id}}') {{name}}
             .row
               .col-xs-12.text-right

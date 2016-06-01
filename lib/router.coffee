@@ -1,16 +1,6 @@
 Router.configure
   layoutTemplate: 'layout'
 
-DashboardController = RouteController.extend
-  waitOn: ->
-    Meteor.subscribe 'transactions'
-  template: 'dashboard'
-  data: ->
-    transactions: Transactions.find {}
-    ,
-      sort:
-        date: -1
-
 TransactionsController = RouteController.extend
   waitOn: ->
     Meteor.subscribe 'transactions'
@@ -21,31 +11,31 @@ TransactionsController = RouteController.extend
       sort:
         date: -1
 
-AccountsController = RouteController.extend
+MoneyAccountsController = RouteController.extend
   waitOn: ->
-    Meteor.subscribe 'accounts'
-  template: 'accounts'
+    Meteor.subscribe 'moneyAccounts'
+  template: 'moneyAccounts'
   data: ->
-    accounts: Accounts.find {}
+    moneyAccounts: MoneyAccounts.find {}
     ,
       sort:
         createdAt: -1
 
-UpdateAccountController = RouteController.extend
+UpdateMoneyAccountController = RouteController.extend
   waitOn: ->
-    Meteor.subscribe 'account', @params.account_id
-  template: 'updateAccount'
+    Meteor.subscribe 'moneyAccount', @params.money_ccount_id
+  template: 'updateMoneyAccount'
   data: ->
-    account: Accounts.findOne _id: @params.account_id
+    moneyAccount: MoneyAccounts.findOne _id: @params.money_account_id
     ,
       sort:
         createdAt: -1
 
 AddTransactionController = RouteController.extend
   waitOn: ->
-    Meteor.subscribe 'accounts'
+    Meteor.subscribe 'moneyAccounts'
   data: ->
-    accounts: Accounts.find {}
+    moneyAccounts: MoneyAccounts.find {}
     ,
       sort:
         createdAt: -1
@@ -53,47 +43,42 @@ AddTransactionController = RouteController.extend
 UpdateTransactionController = RouteController.extend
   waitOn: ->
     Meteor.subscribe 'transaction', @params.transaction_id
-    Meteor.subscribe 'accounts'
+    Meteor.subscribe 'moneyAccounts'
   template: 'updateTransaction'
   data: ->
     transaction: Transactions.findOne _id: @params.transaction_id
-    accounts: Accounts.find {}
+    moneyAccounts: MoneyAccounts.find {}
     ,
       sort:
         createdAt: -1
 
 ImportTransactionsController = RouteController.extend
   waitOn: ->
-    Meteor.subscribe 'accounts'
+    Meteor.subscribe 'moneyAccounts'
   template: 'importTransactions'
   data: ->
-    accounts: Accounts.find {}
+    moneyAccounts: MoneyAccounts.find {}
     ,
       sort:
         createdAt: -1
 
 Router.map ->
-  @route 'dashboard',
-    path: '/'
-    controller: DashboardController
-    onAfterAction: ->
-      setTitle 'Dashboard'
-  @route 'accounts',
-    path: '/accounts'
-    controller: AccountsController
+  @route 'moneyAccounts',
+    path: '/money_accounts'
+    controller: MoneyAccountsController
     onAfterAction: ->
       setTitle 'Konten'
-  @route 'addAccount',
-    path: '/accounts/add'
+  @route 'addMoneyAccount',
+    path: '/money_accounts/add'
     onAfterAction: ->
       setTitle 'Konto hinzufügen'
-  @route 'updateAccount',
-    path: '/accounts/update/:account_id'
-    controller: UpdateAccountController
+  @route 'updateMoneyAccount',
+    path: '/money_accounts/update/:money_account_id'
+    controller: UpdateMoneyAccountController
     onAfterAction: ->
       setTitle 'Konto bearbeiten'
   @route 'transactions',
-    path: '/transactions'
+    path: '/'
     onAfterAction: ->
       setTitle 'Transaktionen'
   @route 'addTransaction',

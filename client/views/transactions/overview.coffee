@@ -31,34 +31,8 @@ Template.transactions.events
         template.find('[data-id=modal-assign-category]').value = ''
         $('#assign-category-modal').modal('hide')
 
-  'click [data-id=reset-filter]': (event, template) ->
-    event.preventDefault()
-
-    template.filterDate.set('')
-    template.filterAccountId.set('')
-    template.filterValue.set('')
-    template.filterCategory.set('')
-    template.filterDescription.set('')
-
-  'keyup [data-id=filter-date]': _.debounce((event, template) ->
-    template.filterDate.set(template.find('[data-id=filter-date]').value)
-  , 300)
-
-  'change [data-id=filter-account-id]': _.debounce((event, template) ->
-    template.filterAccountId.set(template.find('[data-id=filter-account-id]').value)
-  , 300)
-
-  'keyup [data-id=filter-value]': _.debounce((event, template) ->
-    template.filterValue.set(template.find('[data-id=filter-value]').value)
-  , 300)
-
-  'keyup [data-id=filter-category]': _.debounce((event, template) ->
-    template.filterCategory.set(template.find('[data-id=filter-category]').value)
-  , 300)
-
-  'keyup [data-id=filter-description]': _.debounce((event, template) ->
-    template.filterDescription.set(template.find('[data-id=filter-description]').value)
-  , 300)
+  'change [data-id=moneyaccount-id]': (event, template) ->
+    template.moneyAccountId.set(template.find('[data-id=moneyaccount-id]').value)
 
 Template.transactions.helpers
   transactions: ->
@@ -67,8 +41,8 @@ Template.transactions.helpers
     sort:
       date: -1
 
-  accounts: ->
-    Accounts.find {}
+  moneyAccounts: ->
+    MoneyAccounts.find {}
     ,
     sort:
       createdAt: 1
@@ -125,33 +99,15 @@ Template.transactions.helpers
           total += element.value
     accounting.formatMoney(total)
 
-  filterDate: ->
-    Template.instance().filterDate.get()
-
-  isSelectedAccount: (accountId) ->
-    return 'selected' if Template.instance().filterAccountId.get() is accountId
-
-  filterValue: ->
-    Template.instance().filterValue.get()
-
-  filterCategory: ->
-    Template.instance().filterCategory.get()
-
-  filterDescription: ->
-    Template.instance().filterDescription.get()
-
   isImported: (category) ->
     category is 'import'
 
 Template.transactions.onCreated ->
-  @filterDate = new ReactiveVar('')
-  @filterAccountId = new ReactiveVar('')
-  @filterValue = new ReactiveVar('')
-  @filterCategory = new ReactiveVar('')
-  @filterDescription = new ReactiveVar('')
-
+  @moneyAccountId = new ReactiveVar('')
   self = @
-
   self.autorun ->
-    self.transactionsSubscriptionHandle = Meteor.subscribe 'transactions', self.filterDate.get(), self.filterAccountId.get(), self.filterValue.get(), self.filterCategory.get(), self.filterDescription.get()
-    self.accountsSubscriptionHandle = Meteor.subscribe 'accounts'
+    self.transactionsSubscriptionHandle = Meteor.subscribe 'transactions', self.moneyAccountId.get() #, self.filterDate.get(), self.filterMoneyAccountId.get(), self.filterValue.get(), self.filterCategory.get(), self.filterDescription.get()
+    self.accountsSubscriptionHandle = Meteor.subscribe 'moneyAccounts'
+
+Template.transactions.onRendered ->
+  Template.instance().moneyAccountId.set(Template.instance().find('[data-id=moneyaccount-id]').value)

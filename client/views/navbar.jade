@@ -11,11 +11,7 @@ template(name='navbar')
           if currentUser
             ul
               li
-                a(href="{{pathFor 'dashboard'}}")
-                  i.fa.fa-dashboard
-                  | Dashboard
-              li
-                a(href="{{pathFor 'accounts'}}")
+                a(href="{{pathFor 'moneyAccounts'}}")
                   i.fa.fa-university
                   | Konten
               li

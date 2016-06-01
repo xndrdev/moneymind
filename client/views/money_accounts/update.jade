@@ -1,9 +1,9 @@
-template(name='updateAccount')
+template(name='updateMoneyAccount')
   .container
     .row
       .col-xs-12
-        with account
-          form(data-id='update-account-form')
+        with moneyAccount
+          form(data-id='update-money-account-form')
             h3 Konto bearbeiten: {{name}}
             .content-block.table
               .row
@@ -25,6 +25,6 @@ template(name='updateAccount')
                   input.input(name='description' data-id='description' value='{{description}}')
               .row
                 .col-xs-6
-                  a.button(href="{{pathFor 'accounts'}}") Abbrechen
+                  a.button(href="{{pathFor 'moneyAccounts'}}") Abbrechen
                 .col-xs-6.text-right
-                  button.btn.btn-success(type='submit' data-id='update-account') Speichern
+                  button.btn.btn-success(type='submit' data-id='update-money-account') Speichern

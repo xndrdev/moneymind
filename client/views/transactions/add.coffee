@@ -8,7 +8,7 @@ Template.addTransaction.events
       value: accounting.unformat '€ ' + template.find('[data-id=value]').value, ','
       category: template.find('[data-id=category]').value
       description: template.find('[data-id=description]').value
-      accountId: template.find('[data-id=account-id]').value
+      moneyAccountId: template.find('[data-id=money-account-id]').value
 
     Meteor.call 'addTransaction', transaction, (error) ->
       if error

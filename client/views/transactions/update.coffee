@@ -9,7 +9,7 @@ Template.updateTransaction.events
       value: accounting.unformat '€ ' + template.find('[data-id=value]').value, ','
       category: template.find('[data-id=category]').value
       description: template.find('[data-id=description]').value
-      accountId: template.find('[data-id=account-id]').value
+      moneyAccountId: template.find('[data-id=money-account-id]').value
 
     Meteor.call 'updateTransaction', transaction, (error) ->
       if error
@@ -19,8 +19,8 @@ Template.updateTransaction.events
         sweetAlert 'Erfolg', 'Die Transaktion wurde erfolgreich bearbeitet', 'success'
 
 Template.updateTransaction.helpers
-  isSelectedAccount: (id, accountId) ->
-    return 'selected' if id is accountId
+  isSelectedMoneyAccount: (id, moneyAccountId) ->
+    return 'selected' if id is moneyAccountId
 
   selectedIfTransactionTypeExpense: (type) ->
     return 'selected' if type is 'expsene'

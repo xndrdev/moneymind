@@ -1,7 +1,7 @@
 @Transactions = new Mongo.Collection 'transactions'
 
 Transactions.helpers account: ->
-  Accounts.findOne @accountId
+  MoneyAccounts.findOne @moneyAccountId
 
 Meteor.methods
   addTransaction: (transaction) ->
@@ -14,7 +14,7 @@ Meteor.methods
       value: value
       category: transaction.category
       description: transaction.description
-      accountId: transaction.accountId
+      moneyAccountId: transaction.moneyAccountId
 
   updateTransaction: (transaction) ->
     #throw new Meteor.Error(401, i18n 'notSignedIn') unless Meteor.user()
@@ -33,7 +33,7 @@ Meteor.methods
         value: transaction.value
         category: transaction.category
         description: transaction.description
-        accountId: transaction.accountId
+        moneyAccountId: transaction.moneyAccountId
 
   removeTransaction: (transaction) ->
     #throw new Meteor.Error(401, i18n 'notSignedIn') unless Meteor.user()
@@ -63,7 +63,7 @@ Meteor.methods
           value: value
           category: 'import'
           description: element.Verwendungszweck
-          accountId: data.accountId
+          moneyAccountId: data.moneyAccountId
 
   updateTransactionCategory: (transaction) ->
     throw new Meteor.Error() unless transaction._id
